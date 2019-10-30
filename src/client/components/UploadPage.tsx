@@ -138,7 +138,7 @@ const UploadPage = () => {
 
           <form noValidate autoComplete="off">
             <TextField
-              id="standard-helperText"
+              id="input-gcp-info"
               label="Input GCP Info"
               className={classes.textField}
               helperText="Enter a JSON object from GCP that includes the project_id key"

@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 const { ipcRenderer } = require('electron');
 require('events').EventEmitter.defaultMaxListeners = 25;
@@ -43,6 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 // style elements no longer being used:
 // className="deployTitle"
+// and more
 
 const GcpGetClusters = () => {
   const [Store, setStore] = useContext(StoreContext);
@@ -183,7 +185,7 @@ const GcpGetClusters = () => {
       </div>
 
       <Button variant="contained" color="primary" className={classes.button} onClick={handleSubmit}>
-        Submit
+        Fetch
       </Button>
 
       {/* <div id='buts'>

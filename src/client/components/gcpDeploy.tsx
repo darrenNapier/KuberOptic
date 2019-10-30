@@ -12,6 +12,11 @@
 import * as React from 'react';
 import { useContext } from 'react';
 import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 import {StoreContext} from '../../../store'
 const [quickstart, create] = require('../../main/gcp/getGCPdata').default
@@ -19,6 +24,26 @@ const { ipcRenderer } = require('electron');
 
 require('events').EventEmitter.defaultMaxListeners = 25;
 import GetGCP from './GcpGetClusters';
+
+// Material-UI uses "CSS in JS" styling
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    // root: { // currently not being used - maybe delete later
+    //   display: 'flex',
+    //   // flexGrow: 1
+    // },
+    text: { 
+      align: 'center',
+      margin: '10px 0 20px 0', // will adjust later
+    },
+    button: {
+      margin: theme.spacing(1),
+    },
+    textField: {
+      width: "100%",
+    },
+  }),
+);
 
 // various inputs will be stored in this object and will be submitted when you call handleSubmit
 let deployVals = {};
@@ -112,21 +137,41 @@ const gcpDeploy = () =>{
     event.returnValue = 'done';
   })
 
+  const classes = useStyles(); // this is showing an error but this is directly from Material-UI and is fine
+
   return (
-    <div id="deployWrapper">
+    // <div id="deployWrapper">
+    <div>
       <GetGCP/>
       <br/>
       <Divider />
       
-      <div className="inputPageDeploy">
-        <h3 className="deployTitle">Deploy New GCP Cluster:</h3>
-          <input id="deployClustName" 
-          name="name"
-          className='clusterType' 
-          type="text" 
-          onChange={handleName} 
-          placeholder="cluster name" 
-          required={true}></input>
+      <Grid container direction="column" justify="space-around" alignItems="center">
+      {/* <div className="inputPageDeploy"> */}
+        {/* <h3 className="deployTitle">Deploy New GCP Cluster:</h3> */}
+
+        <Typography className={classes.text} variant="h5">
+          Deploy New GCP Cluster:
+        </Typography>
+
+        {/* <input id="deployClustName" 
+        name="name"
+        className='clusterType' 
+        type="text" 
+        onChange={handleName} 
+        placeholder="cluster name" 
+        required={true}></input> */}
+
+        {/* figure out why formatting of text field is weird */}
+        <form noValidate autoComplete="off"> 
+          <TextField
+            id="deploy-gcp-cluster-name"
+            label="Input cluster name"
+            className={classes.textField}
+            margin="normal"
+            onChange={handleName} // check to make sure if this works
+          />
+        </form>
 
         <div id="deployDropDowns">
           <select id="deployChooseClustType" className='clusterType' onChange={handleType}>
@@ -149,66 +194,81 @@ const gcpDeploy = () =>{
           </select>
         </div>
 
-          <div className="deployLocTitle">
-            <h3 className="deployTitle">Deploy Location</h3>
-            <form className="nodeLocationRadios">
-              <div className="div1">
-                <label>  
-                <input type="radio" name="location" value="us-central1-a" onChange={handleLoc}></input>
-                  US Central (1A)
-                </label>
-              </div>
-              <div className="div2">
-                <label>  
-                <input type="radio" name="location" value="us-central1-b" onChange={handleLoc}></input>
-                  US Central (1B)
-                </label>
-              </div>
-              <div className="div3">
-                <label>  
-                <input type="radio" name="location" value="us-central1-c" onChange={handleLoc}></input>
-                  US Central (1C)
-                </label>  
-              </div>
-              <div className="div4">
-                <label>  
-                <input type="radio" name="location" value="us-west1-a" onChange={handleLoc}></input>
-                  US West (1A)
-                </label>
-              </div>
-              <div className="div5">
-                <label>  
-                <input type="radio" name="location" value="southamerica-east1-a" onChange={handleLoc}></input>
-                  S.America East (1A)
-                </label>
-              </div>
-              <div className="div6">
-                <label>  
-                <input type="radio" name="location" value="southamerica-east1-b" onChange={handleLoc}></input>
-                  S.America East (1B)
-                </label>
-              </div>
-              <div className="div7">
-                <label>  
-                <input type="radio" name="location" value="southamerica-east1-c" onChange={handleLoc}></input>
-                  S.America East (1C)
-                </label>
-              </div>
-              <div className="div8">
-                <label>  
-                <input type="radio" name="location" value="europe-west2-a" onChange={handleLoc}></input>
-                  Europe West (2A)
-                </label>
-              </div>
-            </form> 
-          </div>
+        <div className="deployLocTitle">
+          {/* <h3 className="deployTitle">Deploy Location</h3> */}
+
+          {/* maybe add a className here */}
+          <Typography variant="h6"> 
+            Deploy Location
+          </Typography>
+
+          <form className="nodeLocationRadios">
+            <div className="div1">
+              <label>  
+              <input type="radio" name="location" value="us-central1-a" onChange={handleLoc}></input>
+                US Central (1A)
+              </label>
+            </div>
+            <div className="div2">
+              <label>  
+              <input type="radio" name="location" value="us-central1-b" onChange={handleLoc}></input>
+                US Central (1B)
+              </label>
+            </div>
+            <div className="div3">
+              <label>  
+              <input type="radio" name="location" value="us-central1-c" onChange={handleLoc}></input>
+                US Central (1C)
+              </label>  
+            </div>
+            <div className="div4">
+              <label>  
+              <input type="radio" name="location" value="us-west1-a" onChange={handleLoc}></input>
+                US West (1A)
+              </label>
+            </div>
+            <div className="div5">
+              <label>  
+              <input type="radio" name="location" value="southamerica-east1-a" onChange={handleLoc}></input>
+                S.America East (1A)
+              </label>
+            </div>
+            <div className="div6">
+              <label>  
+              <input type="radio" name="location" value="southamerica-east1-b" onChange={handleLoc}></input>
+                S.America East (1B)
+              </label>
+            </div>
+            <div className="div7">
+              <label>  
+              <input type="radio" name="location" value="southamerica-east1-c" onChange={handleLoc}></input>
+                S.America East (1C)
+              </label>
+            </div>
+            <div className="div8">
+              <label>  
+              <input type="radio" name="location" value="europe-west2-a" onChange={handleLoc}></input>
+                Europe West (2A)
+              </label>
+            </div>
+          </form> 
+        </div>
 
 
-          <div id='buts'>
-            <button id="deploySubmit" className='uploadButtD' onClick={handleDeploy}> Deploy </button>
-            <button id="deployBack" className = 'uploadButtD' onClick={handleBack}>  Back  </button>
-          </div>
-      </div>
+          {/* <div id='buts'> */}
+            {/* <button id="deploySubmit" className='uploadButtD' onClick={handleDeploy}> Deploy </button> */}
+            {/* <button id="deployBack" className = 'uploadButtD' onClick={handleBack}>  Back  </button> */}
+          {/* </div> */}
+
+        <Button variant="contained" color="primary" className={classes.button} onClick={handleDeploy}>
+          Deploy
+        </Button>
+
+        <Button variant="outlined" color="primary" className={classes.button} onClick={handleBack}>
+          Return Home
+        </Button>
+      {/* </div> */}
+      </Grid>
     </div>
   )
 }
