@@ -137,14 +137,14 @@ const UploadPage = () => {
           </div>
 
           <form noValidate autoComplete="off">
-              <TextField
-                id="standard-helperText"
-                label="Input GCP Info"
-                className={classes.textField}
-                helperText="Enter a JSON object from GCP that includes the project_id key"
-                margin="normal"
-                onChange={handleInput}
-              />
+            <TextField
+              id="standard-helperText"
+              label="Input GCP Info"
+              className={classes.textField}
+              helperText="Enter a JSON object from GCP that includes the project_id key"
+              margin="normal"
+              onChange={handleInput}
+            />
           </form>
 
           <div>
