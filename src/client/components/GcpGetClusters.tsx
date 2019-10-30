@@ -13,8 +13,30 @@ import * as React from 'react';
 import { useContext } from 'react';
 import { StoreContext } from '../../../store';
 import Checkbox from './subcomponents/Checkbox';
+import { Typography } from '@material-ui/core';
+import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
 const { ipcRenderer } = require('electron');
 require('events').EventEmitter.defaultMaxListeners = 25;
+
+// Material-UI uses "CSS in JS" styling
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    // root: { // currently not being used - maybe delete later
+    //   display: 'flex',
+    //   // flexGrow: 1
+    // },
+    text: {
+      align: 'center',
+      margin: '0 0 50px 0', // will adjust later
+    },
+    textField: {
+      width: "100%",
+    },
+    button: {
+      margin: theme.spacing(1),
+    },
+  }),
+);
 
 const GcpGetClusters = () => {
   const [Store, setStore] = useContext(StoreContext);
@@ -137,11 +159,17 @@ const GcpGetClusters = () => {
 
   return (
     <div className="getGCPWrapper">
-      <h3 className="deployTitle">
-        Display GCP Clusters:</h3> 
+      {/* <h3 className="deployTitle">
+        Display GCP Clusters:</h3>  */}
+
+      <Typography variant="h5">
+        Display GCP Clusters:
+      </Typography>
+
       <div id='uploadSelectMenu'>
         {deployLocations}
       </div>
+
       <div id='buts'>
         <button id="deploySubmit" className='uploadButtD' onClick={handleSubmit}> Fetch </button>
       </div>
