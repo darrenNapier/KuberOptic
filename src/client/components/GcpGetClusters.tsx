@@ -13,7 +13,7 @@ import * as React from 'react';
 import { useContext } from 'react';
 import { StoreContext } from '../../../store';
 import Checkbox from './subcomponents/Checkbox';
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -32,9 +32,9 @@ const useStyles = makeStyles((theme: Theme) =>
       align: 'center',
       margin: '10px 0 20px 0', // will adjust later
     },
-    textField: {
-      width: "100%",
-    },
+    // textField: {
+    //   width: "100%",
+    // },
     button: {
       margin: theme.spacing(1),
     },
